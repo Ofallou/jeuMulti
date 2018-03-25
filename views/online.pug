@@ -1,0 +1,30 @@
+block head
+link(rel='stylesheet', href='/stylesheets/style.css')
+link(rel="stylesheet", href="/stylesheets/bootstrap.min.css")
+script(src="/socket.io/socket.io.js")
+script(src="/javascripts/jquery.js")
+script(src="/javascripts/client.js")
+
+block content
+
+    header
+        ul
+            li
+                a(href="/") Accueil
+            li
+                each joueur in online
+                    a(href="/disconnect/" + joueur.pseudo) Se deconnecter
+
+            h1.welcome
+    div.container
+        div.row
+            ul
+                each joueur in online
+                    li.card
+                        input(type="hidden", value=joueur.pseudo)
+                        .image
+                            img(src="/images/" + joueur.avatar + ".png" alt="avatar" class="rounded-circle"  )
+                            h5.card-title= joueur.pseudo
+                        a(class="btn btn-primary" href="/jeu" role="button") Jouez
+
+    

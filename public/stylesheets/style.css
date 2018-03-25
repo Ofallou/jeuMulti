@@ -1,0 +1,97 @@
+body {
+
+    background-color: #8eff4c;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.error {
+
+    color: red
+}
+
+header {
+    background-color: #005cbf;
+    color: black;
+}
+
+footer {
+
+    position: absolute;
+
+    top: 300px;
+}
+
+.espace {
+
+    padding-left: 1.8em;
+    margin-right: 1.8em;
+}
+
+.input-group-text {
+
+    margin: 1em;
+}
+
+.message {
+    color: green
+}
+
+.card-img-top {
+    width: 100%;
+    margin: auto;
+    z-index: 200;
+
+}
+
+.card {
+
+    width: 8rem;
+
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(60px) rotate(1turn);
+    }
+}
+
+.cercle {
+    position: absolute;
+    animation-name: carre;
+    animation-duration: 10s;
+
+}
+
+@keyframes carre {
+    0% {
+        transform: translateX(0px) rotate(45deg);
+    }
+    100% {
+        transform: translateX(600px) rotate(1turn);
+    }
+}
+
+.player {
+    position: absolute;
+    left: 50px;
+    border-style: hidden;
+
+}
+
+.chiffreJouerplayer1, .chiffreJouerplayer2 {
+    position: absolute;
+    color: steelblue;
+    top: 100px;
+    left: 250px;
+    font-size: 100px;
+    animation-name: slide;
+    animation-duration: 2s;
+    animation-delay: 1s;
+
+}

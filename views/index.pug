@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1 Bienvenu sur mon site
+    p=message
+    script(src="/socket.io/socket.io.js")
+    script.
+        var socket = io('//localhost:3000');
+        socket.on('message', function (data) {
+            console.log(data);
+        });

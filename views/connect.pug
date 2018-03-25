@@ -1,0 +1,22 @@
+block head
+link(rel='stylesheet', href='/stylesheets/style.css')
+link(rel="stylesheet", href="/stylesheets/bootstrap.min.css")
+script(src="/javascripts/jquery.js")
+script(src="/javascripts/client.js")
+script(src="/socket.io/socket.io.js")
+
+block content
+    header
+        ul
+            li
+                a(href="/") Accueil
+            li
+                a(href="/disconnect/" + pseudo) Se deconnecter
+    div.container
+        h1
+        p Vous etes connecté en tant que
+        p= js
+
+        h2.welcome
+        a(href="/jeu") le jeu
+

@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    div.container
+        form.input-group-mb-3(action='enr', method='post')
+            h4.espace Inscription
+            input(type='text', name='nomComplet', required='required', placeholder='Votre nom')
+            input(type='text', name='pseudo', required='required', placeholder="pseudo")
+            p.error #{error}
+            h5.espace Choix de votre avatar
+            input(type='radio', name='avatar', value='man1' checked=true)
+            img(src='/images/man1.png')
+            input(type='radio', name='avatar', value='man2')
+            img(src='/images/man2.png')
+            input(type='radio', name='avatar', value='woman1')
+            img(src='/images/woman1.png')
+            input(type='radio', name='avatar', value='woman2')
+            img(src='/images/woman2.png')
+            input(type='radio', name='avatar', value='man3')
+            img(src='/images/man3.png')
+            br
+            input(type='submit', value='Bon jeu')
+            p.message #{message}
+        h4.espace
+
+    form.input-group-mb-3(action='connect', method='post')
+        .form-group-text
+        h4.espace Déjà inscrit ? Tapez votre pseudo
+        input(type='text', name='pseudo', required='required', placeholder="pseudo")
+        br
+        p.error= errorLogin
+        input.btn-btn-primary-mb2(type='submit', value='Connexion')
+
+
+        

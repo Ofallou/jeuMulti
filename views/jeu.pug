@@ -1,0 +1,38 @@
+block head
+link(rel='stylesheet', href='/stylesheets/style.css')
+link(rel="stylesheet", href="/stylesheets/bootstrap.min.css")
+script(src="/socket.io/socket.io.js")
+script(src="/javascripts/jquery.js")
+script(src="/javascripts/client.js")
+
+block content
+    .quitter
+        a(href="/disconnect/" + joueur.pseudo) Quitter le jeu
+
+            input(type="hidden", value=joueur.pseudo)
+    div.container
+        div.player
+            .card
+                .image
+                    img.card-img-top(src="/images/" + joueur.avatar + ".png" alt="avatar")
+                    h5.card-title= joueur.pseudo
+                    h5 XP #{joueur.score}
+                    p.card-text
+
+            .chiffre
+                button.btn.btn-primary(type="button") lancer votre chiffre !
+        div.chiffreJouerplayer1
+
+    
+          
+    
+      
+
+    
+    
+
+  
+    
+
+    
+
