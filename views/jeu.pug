@@ -23,8 +23,14 @@ block content
                 button.btn.btn-primary(type="button") lancer votre chiffre !
         div.chiffreJouerplayer1
 
-    
-          
+
+          ul
+            each joueur in online
+              li.card
+
+                .image
+                  img(src="/images/" + joueur.avatar + ".png" alt="avatar" class="rounded-circle"  )
+                  h5.card-title= joueur.pseudo
     
       
 

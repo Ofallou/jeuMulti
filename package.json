@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "angularjs": "0.0.1",
     "body-parser": "~1.18.2",
     "bootstrap": "^4.0.0",
     "connect-mongodb-session": "^1.4.0",

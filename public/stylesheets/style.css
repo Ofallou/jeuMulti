@@ -1,11 +1,57 @@
-body {
+/* ----------------------------
+	Login
+---------------------------- */
 
-    background-color: #8eff4c;
+.login {
+    padding: 5px;
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
 }
 
-a {
-    color: #00B7FF;
+.login > * {
+    width: 100%;
+
+    margin: 0 auto 20px auto;
 }
+
+.connexion {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+}
+
+form > input {
+    box-sizing: border-box;
+    font-size: 24px;
+    padding: 5px;
+    border: 5px solid #F44336;
+    background-color: #fff;
+    border-width: 0 0 5px 0;
+    outline: none;
+}
+
+button {
+    font-size: 20px;
+    border: none;
+    color: white;
+    background-color: #F44336;
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+h1 {
+    font-family: 'Indie Flower', cursive;
+    text-align: center;
+    color: #1d1d1d;
+}
+
+
 
 .error {
 
@@ -13,8 +59,17 @@ a {
 }
 
 header {
-    background-color: #005cbf;
-    color: black;
+    background-color: #b3d7ff;
+    font-weight: bold;
+
+}
+
+ul {
+    padding-top: 20px;
+    display: inline-flex;
+    text-align: center;
+    text-indent: 20px;
+    list-style: none;
 }
 
 footer {
@@ -77,21 +132,63 @@ footer {
     }
 }
 
-.player {
+.player1 {
     position: absolute;
+    top: 10%;
     left: 50px;
     border-style: hidden;
 
 }
 
-.chiffreJouerplayer1, .chiffreJouerplayer2 {
+.player2 {
     position: absolute;
-    color: steelblue;
-    top: 100px;
-    left: 250px;
-    font-size: 100px;
-    animation-name: slide;
-    animation-duration: 2s;
-    animation-delay: 1s;
+    top: 10%;
+    left: 80px;
+    border-style: hidden;
 
+}
+
+.pl1 {
+
+    font-weight: bold;
+    font-size: 50px;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 33%;
+    left: 33%;
+    font-family: "Bitstream Charter";
+    border: black solid 2px;
+    text-align: center;
+    text-justify: auto;
+}
+
+.pl2 {
+
+    font-weight: bold;
+    font-size: 50px;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 33%;
+    left: 53%;
+    font-family: "Bitstream Charter";
+    border: black solid 2px;
+    text-align: center;
+    text-justify: auto;
+}
+
+.result {
+
+    font-weight: bold;
+    font-size: 50px;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 65%;
+    left: 43%;
+    font-family: "Bitstream Charter";
+    border: black solid 2px;
+    text-align: center;
+    text-justify: auto;
 }

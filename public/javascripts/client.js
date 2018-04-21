@@ -3,47 +3,64 @@ $(function () {
 
     const pseudo = $('input').val();
     const socket = io('//localhost:3000');
+
+
     socket.on("welcome", function (data) {
         $('.welcome').html(data.welcome);
         console.log(data.welcome);
     });
+
     socket.emit('pseudo', pseudo);
-    socket.on("onlinePlayer", function (data) {
-        console.log(data.playerOnline);
-        /*
-                data.playerOnline.forEach(element => {
-                    let div=document.createElement('div');
 
-                    if(div.innerHTML===element.pseudo){
+    socket.on("on", function (data) {
+        console.log(data.joueur);
+        for (var i = 0; i < data.joueur.length; i++) {
+            if (data.joueur[i] !== pseudo) {
+                var player2 = document.createElement('div');
+                player2.className = "otherplayer";
+                player2.innerHTML = data.joueur[i];
+                document.body.appendChild(player2)
 
-                        console.log(true);
-
-                    }else {
-
-                        div.innerHTML=element.pseudo;
-                        let img=document.createElement('img');
-                        img.src="/images/" + element.avatar + ".png";
-                        document.body.appendChild(img);
-                        document.body.appendChild(div);
-
-                    }
-
-
-                });
-        */
-        let sss = JSON.stringify(joueurs);
-        console.log(sss)
+            }
+        }
 
     });
 
-    $('.btn.btn-primary').on('click', function () {
+
+    $('.de').on('click', function () {
 
         const chiffre = Math.round(Math.random() * (0 + 20) - 0);
-        socket.emit('chiffre', chiffre);
+
+        socket.emit('chiffre', {pseudo: pseudo, chiffre: chiffre});
+
+
+
     });
-    socket.on('chiffre joueur 1', function (data) {
-        //console.log(data)
-        $('.chiffreJouerplayer1').html(data);
+
+    var score = 0;
+
+    socket.on('carte', function (data) {
+
+        console.log("kikikkk " + data.data.chiffre);
+        console.log(data.message);
+        if (data.data.pseudo === pseudo) {
+            $('.pl1').html(data.data.chiffre);
+
+
+        } else {
+
+            $('.pl2').html(data.data.chiffre);
+        }
+
+        if (data.message.includes(pseudo)) {
+            score = score + 2;
+            $('.score').html(score);
+
+
+        }
+
+
+        $('.result').html(data.message)
 
 
     })

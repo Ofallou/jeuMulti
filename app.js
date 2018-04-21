@@ -88,38 +88,86 @@ app.use(function (err, req, res, next) {
 });
 
 
-//const ids=[]
-
+//Nombre de joueurs
 let playerOnline = [];
+let players = [];
+let round = [];
+let partie = 0;
 
 io.on('connection', function (socket) {
 
     console.log('joueur connecté');
 
-    socket.on('disconnect', function (socket) {
-        console.log('Client disconnected !!');
-    });
-
     io.sockets.emit('welcome', {welcome: " Bataille des chiffres"});
+    //Ajout des joueurs une fois connecté dans le tableau players
+    socket.on('pseudo', function (pseudo) {
 
-    socket.on('pseudo', function (data) {
+        //console.log(pseudo)
+        if (players.indexOf(pseudo) == -1) {
+            players.push(pseudo);
+            //console.log(players);
+            //console.log("------"+JSON.stringify(joueurObject));
+            //Limiter le nombre de joueurs a 2 
 
-        mongoose.connect('mongodb://localhost/quizz');
-        const joueur = mongoose.model('joueur', base);
+            console.log("Liste des joueurs " + players);
 
-        joueur.find({pseudo: data}, function (err, data) {
-            playerOnline.push(data[0]);
-            console.log(playerOnline);
-            socket.broadcast.emit('onlinePlayer', {playerOnline: playerOnline})
-        });
+            if (players.length === 2) {
+                io.sockets.emit('on', {joueur: players, message: "Le jeu peur commencer !"});
+            } else if (players.length > 2) {
+                io.sockets.emit('on', {joueur: players, message: "Partie deja en cours Merci de patienter la fin !!"});
 
-        console.log(data);
+            } else {
+
+                socket.broadcast.emit('on', {joueur: players, message: "En attente du prochain joueur"});
+            }
 
 
+            socket.on('chiffre', function (data) {
+                let message = "";
+                console.log("contenu de data " + data.pseudo);
+                console.log(data);
+
+                if (round.indexOf(data.pseudo) == -1) {
+
+                    round.push(data);
+                    round.forEach(function (item) {
+                        console.log("les items :" + item.pseudo)
+                    })
+
+                }
+
+                if (round.length === 2) {
+                    const joueur = mongoose.model('joueur', base);
+                    let query = {};
+                    if (round[0].chiffre > round[1].chiffre) {
+                        message = round[0].pseudo + " gagne ! "
+                    } else if (round[0].chiffre === round[1].chiffre) {
+                        message = " pas de gagnant ! "
+                    } else {
+                        message = round[1].pseudo + " gagne ! "
+                    }
+
+                    round = [];
+                } else {
+                    message = "waiting for player to play !!!!!";
+                }
+                //console.log(message);
+                io.sockets.emit('carte', {data: data, message: message});
+
+                partie++;
+
+            });
+
+
+            socket.on('disconnect', function (socket) {
+                players.splice(pseudo);
+                console.log('Client disconnected !!');
+            });
+        }
+        console.log(players);
+        //console.log(pseudo);
     });
-
 
 });
-
 
 module.exports = {app: app, server: server};

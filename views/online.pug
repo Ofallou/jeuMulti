@@ -6,25 +6,27 @@ script(src="/javascripts/jquery.js")
 script(src="/javascripts/client.js")
 
 block content
-
     header
         ul
             li
                 a(href="/") Accueil
             li
-                each joueur in online
-                    a(href="/disconnect/" + joueur.pseudo) Se deconnecter
+
+                a(href="/disconnect/" + player.pseudo) Se deconnecter
+                input(type="hidden", value=player.pseudo)
 
             h1.welcome
     div.container
-        div.row
-            ul
-                each joueur in online
-                    li.card
-                        input(type="hidden", value=joueur.pseudo)
-                        .image
-                            img(src="/images/" + joueur.avatar + ".png" alt="avatar" class="rounded-circle"  )
-                            h5.card-title= joueur.pseudo
-                        a(class="btn btn-primary" href="/jeu" role="button") Jouez
+        div.player
+            img(src="/images/" + player.avatar + ".png" alt="avatar")
+            span.score
+            p.pseudo=player.pseudo
+            img.de(src="/images/de.png" )
+        div.otherplayer
+    .pl1
+    .pl2
+    .result
+
+            
 
     

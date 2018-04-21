@@ -8,7 +8,7 @@ var enregistrement = new Schema({
     nomComplet: String,
     pseudo: String,
     avatar: String,
-    score: Number,
+    scores: [],
     date: {type: Date, default: Date.now}
 
 

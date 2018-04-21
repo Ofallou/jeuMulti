@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
 
     res.render('connexion');
 
-    // mongoose.connection.close();
+    mongoose.connection.close();
 });
 
 module.exports = router;

@@ -44,22 +44,40 @@ router.post('/', function (req, res, next) {
                 nomComplet: req.body.nomComplet,
                 pseudo: req.body.pseudo,
                 avatar: req.body.avatar,
-                score: 0,
-                idSocket: String,
+                scores: [],
+
 
             });
-
+            req.session.name = joueur.pseudo;
             //le jouer est enregistré en base
             joueur.save(function (err) {
                 if (err) console.log(err);
 
-                res.render('connect', joueur);
-                mongoose.connection.close();
+                console.log(joueur);
+
+                req.session.name = joueur.pseudo;
+                res.render('online', {player: joueur})
+
+                //mongoose.connection.close();
             })
         }
 
 
     });
+
+});
+
+
+router.get('/', function (req, res, next) {
+
+    if (req.session.name) {
+        res.render('connect', {user: req.session.name, userId: req.session._id});
+
+    } else {
+
+        res.render('connexion');
+    }
+
 
 });
 
