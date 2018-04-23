@@ -11,7 +11,7 @@ var enregistrement = new Schema({
     nomComplet: String,
     pseudo: String,
     avatar: String,
-    score: [],
+    scores: [],
     idSocket: String,
     date: {type: Date, default: Date.now}
 
