@@ -11,7 +11,7 @@ var enregistrement = new Schema({
     nomComplet: String,
     pseudo: String,
     avatar: String,
-    score: Number,
+    score: [],
     idSocket: String,
     date: {type: Date, default: Date.now}
 
@@ -30,22 +30,17 @@ router.post('/', function (req, res, next) {
     //On valide que le client qui s'enregistre n'est pas deja present en base via un user
     joueurs.find({pseudo: req.body.pseudo}, function (err, data) {
 
-
         if (data.length > 0) {
-
             console.log('user deja existant');
-
             res.render('connexion', {error: "Le nom d'utilisateur existe deja !!"});
 
         } else {
-
 
             var joueur = new joueurs({
                 nomComplet: req.body.nomComplet,
                 pseudo: req.body.pseudo,
                 avatar: req.body.avatar,
                 scores: [],
-
 
             });
             req.session.name = joueur.pseudo;

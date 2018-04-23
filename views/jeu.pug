@@ -6,35 +6,17 @@ script(src="/javascripts/jquery.js")
 script(src="/javascripts/client.js")
 
 block content
-    .quitter
-        a(href="/disconnect/" + joueur.pseudo) Quitter le jeu
-
-            input(type="hidden", value=joueur.pseudo)
-    div.container
-        div.player
-            .card
-                .image
-                    img.card-img-top(src="/images/" + joueur.avatar + ".png" alt="avatar")
-                    h5.card-title= joueur.pseudo
-                    h5 XP #{joueur.score}
-                    p.card-text
-
-            .chiffre
-                button.btn.btn-primary(type="button") lancer votre chiffre !
-        div.chiffreJouerplayer1
+  span
+  div.container-fluid
+    div.col-md-6
+      h4 Le jeu
+      p jeu de bataille de chiffre jouable a deux en lançant les dés.
+      p Dés que l'image apparait c'est votre tour cliquez pour lancer.
+      p Bon jeu.
 
 
-          ul
-            each joueur in online
-              li.card
 
-                .image
-                  img(src="/images/" + joueur.avatar + ".png" alt="avatar" class="rounded-circle"  )
-                  h5.card-title= joueur.pseudo
-    
-      
-
-    
+      a(href="/")  retour a l'accueil
     
 
   

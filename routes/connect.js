@@ -16,6 +16,7 @@ router.post('/', function (req, res, next) {
     //On verifie si le joueur est deja en base
 
     joueur.find({pseudo: pseudo}, function (err, data) {
+        //console.log("****"+data)
 
         if (err) throw err;
 
@@ -36,7 +37,7 @@ router.post('/', function (req, res, next) {
 router.get('/', function (req, res, next) {
 
     if (req.session.name) {
-        res.render('connect', {user: req.session.name, userId: req.session._id});
+        res.render('online', {user: req.session.name, userId: req.session._id});
 
     } else {
 

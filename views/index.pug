@@ -1,7 +1,21 @@
 extends layout
 
 block content
-    h1 Bienvenu sur mon site
+    h1 Bataille des chiffres
     p=message
-    
-    
+    h4.connexion Tableau des scores
+
+    div.row
+        div.connexion
+
+            table.table
+                tbody
+                    th pseudo
+                    th score
+                        each d in data
+                            tr
+                                td=d.pseudo
+                                td=d.scores
+
+
+

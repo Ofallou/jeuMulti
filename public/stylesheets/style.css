@@ -107,14 +107,7 @@ footer {
 
 }
 
-@keyframes slide {
-    0% {
-        transform: translateX(0) rotate(0);
-    }
-    100% {
-        transform: translateX(60px) rotate(1turn);
-    }
-}
+
 
 .cercle {
     position: absolute;
@@ -149,46 +142,104 @@ footer {
 }
 
 .pl1 {
-
+    animation-name: slide1;
     font-weight: bold;
     font-size: 50px;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     position: absolute;
     top: 33%;
     left: 33%;
-    font-family: "Bitstream Charter";
-    border: black solid 2px;
     text-align: center;
     text-justify: auto;
+}
+
+@keyframes slide1 {
+    0% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(60px) rotate(1turn);
+    }
 }
 
 .pl2 {
 
+    animation-name: slide2;
     font-weight: bold;
     font-size: 50px;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     position: absolute;
     top: 33%;
     left: 53%;
-    font-family: "Bitstream Charter";
-    border: black solid 2px;
+
     text-align: center;
     text-justify: auto;
+}
+
+@keyframes slide2 {
+    0% {
+        transform: translateX(0) rotate(0);
+    }
+    100% {
+        transform: translateX(60px) rotate(1turn);
+    }
 }
 
 .result {
 
+
     font-weight: bold;
-    font-size: 50px;
-    width: 200px;
-    height: 200px;
+    font-size: 20px;
+
+    width: 100px;
+    height: 100px;
     position: absolute;
-    top: 65%;
+    top: 33%;
     left: 43%;
-    font-family: "Bitstream Charter";
-    border: black solid 2px;
-    text-align: center;
     text-justify: auto;
+    text-align: center;
+
 }
+
+.anim {
+    animation: slide;
+
+}
+
+.palyer {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+
+}
+
+.otherplayer {
+    position: absolute;
+    top: 20%;
+    left: 66%;
+}
+
+.wait {
+    animation: Test 1s infinite;
+    color: red;
+}
+
+@keyframes Test {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+

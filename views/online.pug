@@ -8,21 +8,26 @@ script(src="/javascripts/client.js")
 block content
     header
         ul
-            li
+            li.fa-bitcoin
                 a(href="/") Accueil
             li
 
-                a(href="/disconnect/" + player.pseudo) Se deconnecter
+                a(href="/")  Quitter le jeu
                 input(type="hidden", value=player.pseudo)
 
-            h1.welcome
+        h1.welcome
+        div.waitplayer
+
     div.container
         div.player
             img(src="/images/" + player.avatar + ".png" alt="avatar")
             span.score
             p.pseudo=player.pseudo
-            img.de(src="/images/de.png" )
+            img.de(src="/images/de.png" onclick="this.disabled = true;" )
+            p.wait
+
         div.otherplayer
+
     .pl1
     .pl2
     .result
