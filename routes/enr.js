@@ -23,7 +23,7 @@ var joueurs = mongoose.model('joueurs', enregistrement);
 /* GET home page. */
 //gestion de l'enregistrement des joueurs et enregistrement en base
 router.post('/', function (req, res, next) {
-    mongoose.connect('mongodb://localhost/quizz');
+    mongoose.connect('mongodb://localhost/bataille');
 
     console.log(req.body.avatar);
 

@@ -16,7 +16,7 @@ const player = require('./public/javascripts/player');
 
 
 const store = new MongoDBStore({
-    uri: "mongodb://localhost:27017/quizz",
+    uri: "mongodb://localhost:27017/bataille",
     colection: 'sessions'
 
 });
@@ -90,7 +90,7 @@ app.use(function (err, req, res, next) {
 
 
 var getPlayers = function (pseudo) {
-    mongoose.connect('mongodb://localhost/quizz');
+    mongoose.connect('mongodb://localhost/bataille');
 
     const joueur = mongoose.model('player', base);
     joueur.find({pseudo: pseudo}, function (err, data) {
@@ -103,35 +103,34 @@ var getPlayers = function (pseudo) {
 };
 
 
-
-
-
-
-//Nombre de joueurs
+//Mes vars
 let playerOnline = [];
 let players = [];
 let round = [];
 let partie = 0;
 let gamer = [];
 let score = 0;
+
+
 io.on('connection', function (socket) {
 
-    console.log('joueur connecté');
-
+    //console.log('joueur connecté');
     io.sockets.emit('welcome', {welcome: " Bataille des chiffres"});
 
 
     //Ajout des joueurs une fois connecté dans le tableau players
     socket.on('pseudo', function (pseudo) {
-        mongoose.connect('mongodb://localhost/quizz');
+        mongoose.connect('mongodb://localhost/bataille');
         const joueur = mongoose.model('joueur', base);
+
 
 
         joueur.find({pseudo: pseudo}, function (err, pl) {
             //console.log("trouvé"+data)
             if (err) throw err;
             gamer.push(pl);
-            console.log("les joueurs en base complet" + playerOnline);
+            //console.log("les joueurs en base complet" + playerOnline);
+
 
         if (players.indexOf(pseudo) == -1) {
             players.push(pseudo);
@@ -152,21 +151,28 @@ io.on('connection', function (socket) {
             }
 
 
+            let scoreArray = [];
             socket.on('chiffre', function (data) {
-
 
                 socket.on('score', function (data) {
 
-                    console.log("les scores " + data.pseudo);
+                    console.log("Mes scores " + data.score);
+                    //On ajoute le score dans un tableau avant l'enr en base
+                    scoreArray.push(data.score);
+                    // console.log("les scores " + data.pseudo);
+                    var date = new Date().getTime().toLocaleString();
+                    //date.toJSON().slice(0,10).replace(new RegExp("-", 'g'),"/" ).split("/").reverse().join("/")+" "+date.toJSON().slice(11,19)
+
                     joueur.findOneAndUpdate({pseudo: data.pseudo}, {
                         '$set': {
-                            scores: data.score
+                            scores: scoreArray.sort((a, b) => (b - a))
                         }
+
                     }, function (err) {
 
-                        console.log(err);
 
                     })
+
 
                 });
 
@@ -210,6 +216,18 @@ io.on('connection', function (socket) {
                 io.sockets.emit('carte', {data: data, message: message, partie: partie});
 
                 console.log("**partie**" + partie)
+
+
+            });
+
+            var tab = [];
+            socket.on('endParty', function (data) {
+                partie = 0;
+                tab.push(data);
+
+                console.log("info joueurs" + tab[0]);
+
+                io.sockets.emit('gagnant', tab);
 
 
             });

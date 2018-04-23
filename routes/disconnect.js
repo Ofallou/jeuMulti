@@ -9,7 +9,7 @@ var enr = require('../Schema/enregistrement');
 
 router.get('/', function (req, res, next) {
 
-    mongoose.connect('mongodb://localhost/quizz');
+    mongoose.connect('mongodb://localhost/bataille');
     //console.log(req.session.name);
     var deco = req.session.name;
     if (req.session.name) {

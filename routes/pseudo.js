@@ -5,7 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var Schema = mongoose.Schema;
 var objectId = require('mongodb').ObjectID;
 var enr = require('../Schema/enregistrement');
-mongoose.connect('mongodb://localhost/quizz');
+mongoose.connect('mongodb://localhost/bataille');
 var joueur = mongoose.model('joueur', enr);
 
 /* GET home page. */

@@ -9,13 +9,13 @@ var base = require('../Schema/enregistrement');
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
-    mongoose.connect('mongodb://localhost/quizz');
+    mongoose.connect('mongodb://localhost/bataille');
     const joueurs = mongoose.model('joueur', base);
     const pseudo = req.body.pseudo;
 
     //On verifie si le joueur est deja en base
 
-    joueurs.find({}, function (err, data) {
+    joueurs.find({}, null, {sort: {scores: -1}}, function (err, data) {
 
 
         console.log("****" + data);

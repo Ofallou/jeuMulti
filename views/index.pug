@@ -9,13 +9,17 @@ block content
         div.connexion
 
             table.table
-                tbody
-                    th pseudo
-                    th score
+                tbody#table
+                    th Noms
+                    th.table-success Pseudos
+                    th.table-active Score *
+
                         each d in data
                             tr
+                                td=d.nomComplet
                                 td=d.pseudo
-                                td=d.scores
+                                td=d.scores[0]
+
 
 
 
