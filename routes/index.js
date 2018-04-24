@@ -15,10 +15,9 @@ router.get('/', function (req, res, next) {
 
     //On verifie si le joueur est deja en base
 
-    joueurs.find({}, null, {sort: {scores: -1}}, function (err, data) {
+    joueurs.find().sort('scores').exec(function (err, data) {
 
-
-        console.log("****" + data);
+        //console.log("****" + data);
         res.render('index', {data});
 
     });

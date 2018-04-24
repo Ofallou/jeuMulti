@@ -59,7 +59,9 @@ h1 {
 }
 
 header {
-    background-color: #b3d7ff;
+    position: absolute;
+    left: 33%;
+    background-color: #abdde5;
     font-weight: bold;
 
 }
@@ -109,12 +111,6 @@ footer {
 
 
 
-.cercle {
-    position: absolute;
-    animation-name: carre;
-    animation-duration: 10s;
-
-}
 
 @keyframes carre {
     0% {
@@ -125,21 +121,7 @@ footer {
     }
 }
 
-.player1 {
-    position: absolute;
-    top: 10%;
-    left: 50px;
-    border-style: hidden;
 
-}
-
-.player2 {
-    position: absolute;
-    top: 10%;
-    left: 80px;
-    border-style: hidden;
-
-}
 
 .pl1 {
     animation-name: slide1;
@@ -148,20 +130,32 @@ footer {
     width: 100px;
     height: 100px;
     position: absolute;
-    top: 33%;
-    left: 33%;
+    top: 50%;
+    left: 30%;
     text-align: center;
     text-justify: auto;
+    animation-duration: 3s;
 }
 
+
 @keyframes slide1 {
-    0% {
-        transform: translateX(0) rotate(0);
+    from {
+        transform: translateX(20%)
     }
-    100% {
-        transform: translateX(60px) rotate(1turn);
+    to {
+        transform: translateX(33%)
     }
 }
+
+@keyframes slide2 {
+    from {
+        transform: translateX(66%)
+    }
+    to {
+        transform: translateX(53%)
+    }
+}
+
 
 .pl2 {
 
@@ -171,21 +165,13 @@ footer {
     width: 100px;
     height: 100px;
     position: absolute;
-    top: 33%;
+    top: 50%;
     left: 53%;
-
     text-align: center;
     text-justify: auto;
+    animation-duration: 3s;
 }
 
-@keyframes slide2 {
-    0% {
-        transform: translateX(0) rotate(0);
-    }
-    100% {
-        transform: translateX(60px) rotate(1turn);
-    }
-}
 
 .result {
 
@@ -208,16 +194,16 @@ footer {
 
 }
 
-.palyer {
+.player {
     position: absolute;
-    top: 20%;
+    top: 50%;
     left: 20%;
 
 }
 
 .otherplayer {
     position: absolute;
-    top: 20%;
+    top: 50%;
     left: 66%;
 }
 
@@ -238,7 +224,21 @@ footer {
     }
 }
 
+.score, .of {
 
+    font-weight: bold;
 
+}
 
+.final {
 
+    position: absolute;
+    left: 35%;
+    top: 40%;
+    width: 400px;
+    height: 200px;
+    border: 1px black;
+    text-align: center;
+    font-weight: bolder;
+
+}

@@ -15,10 +15,12 @@ block content
                     th.table-active Score *
 
                         each d in data
+                            -var liste = d.scores
+                            - liste.sort((a, b) => (b - a))
                             tr
                                 td=d.nomComplet
                                 td=d.pseudo
-                                td=d.scores[0]
+                                td=liste[0]
 
 
 

@@ -151,29 +151,23 @@ io.on('connection', function (socket) {
             }
 
 
-            let scoreArray = [];
+
             socket.on('chiffre', function (data) {
 
                 socket.on('score', function (data) {
 
-                    console.log("Mes scores " + data.score);
+                    // console.log("scores "+data.pseudo+ " ==> " + data.score);
                     //On ajoute le score dans un tableau avant l'enr en base
-                    scoreArray.push(data.score);
-                    // console.log("les scores " + data.pseudo);
-                    var date = new Date().getTime().toLocaleString();
-                    //date.toJSON().slice(0,10).replace(new RegExp("-", 'g'),"/" ).split("/").reverse().join("/")+" "+date.toJSON().slice(11,19)
-
                     joueur.findOneAndUpdate({pseudo: data.pseudo}, {
-                        '$set': {
-                            scores: scoreArray.sort((a, b) => (b - a))
+                        '$push': {
+                            scores: data.score
                         }
 
                     }, function (err) {
 
+                    });
 
-                    })
-
-
+                    socket.broadcast.emit('scores', data);
                 });
 
 
@@ -213,9 +207,9 @@ io.on('connection', function (socket) {
                 }
                 partie++;
                 //console.log(message);
-                io.sockets.emit('carte', {data: data, message: message, partie: partie});
+                io.sockets.emit('carte', {data: data, message: message, partie: partie, score: score});
 
-                console.log("**partie**" + partie)
+                // console.log("**partie**" + partie)
 
 
             });
@@ -225,7 +219,7 @@ io.on('connection', function (socket) {
                 partie = 0;
                 tab.push(data);
 
-                console.log("info joueurs" + tab[0]);
+                // console.log("info joueurs" + tab[0]);
 
                 io.sockets.emit('gagnant', tab);
 
