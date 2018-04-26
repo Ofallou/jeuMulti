@@ -17,10 +17,9 @@ router.get('/', function (req, res, next) {
         req.session.destroy(function (err) {
 
             if (err) throw err;
-            res.render('index', {message: "Joueur " + deco + " deconnecté"});
 
+            res.redirect('/connexion');
         })
-
 
     }
 

@@ -3,7 +3,7 @@ $(function () {
 
 
     const pseudo = $('input').val();
-    const socket = io('//localhost:3000');
+    const socket = io.connect();
     let playerScore = {
 
         pseudo: "",
@@ -44,7 +44,7 @@ $(function () {
 
     socket.on("on", function (data) {
 
-        //console.log(data.joueur);
+        console.log(data.gamers);
 
         if (data.gamers.length > 1) {
 
@@ -74,17 +74,41 @@ $(function () {
     });
 
 
+    function anim() {
+
+        var el = document.getElementById('pl1');
+
+        var index = setInterval(chiffre, 1);
+        var pos = 300;
+        console.log(pos);
+
+        function chiffre() {
+
+            if (pos == 500) {
+
+                clearInterval(index);
+            } else {
+
+                pos++;
+                el.style.left = pos + 'px';
+
+            }
+        }
+
+    }
+
+
     $('.de').on('click', function () {
 
 
-        console.log(pseudo + " VS " + otherplayer);
+        anim();
 
 
         $('.waitplayer').html("");
         const chiffre = Math.round(Math.random() * (0 + 20) - 0);
         if (pseudo) {
             $('.de').hide();
-            $('.wait').html('on attend son tour..!!');
+            $('.wait').html('.....!');
 
 
         }
@@ -96,12 +120,12 @@ $(function () {
     var score = 0;
     socket.on('carte', function (data) {
 
-        if (data.partie < 21) {
+        if (data.partie < 25) {
             console.log(data.partie);
 
             $('.manche').html();
             if (data.data.pseudo === pseudo) {
-                $('.pl1').html(data.data.chiffre);
+                $('#pl1').html(data.data.chiffre);
 
             } else {
 
@@ -111,7 +135,7 @@ $(function () {
             if (data.message.includes(pseudo)) {
                 score = score + 2;
 
-                $('.score').html(score + " points");
+                $('.scorepl1').html(score + " points");
                 playerScore.pseudo = pseudo;
                 playerScore.score = score;
 
@@ -133,11 +157,11 @@ $(function () {
 
         } else {
 
+
             $('.de').hide();
-            $('.wait').html('Manche terminée!!');
+            $('.wait').html(' GAME OVER ');
             $('.result').hide();
             $('.final').show();
-
 
 
         }
@@ -146,32 +170,26 @@ $(function () {
 
             console.log(score + " ***** " + data.score);
 
-            $('.of').html(data.score + " points");
-
+            $('.scorepl2').html(data.score + " points");
 
             if (score > data.score) {
 
-                $('.final').html("Le gagnant est " + pseudo + " avec un nombre de poins de " + score)
+                $('.final').html(" .....WINNER..... " + pseudo + "............!");
 
-            } else if (score < data.score) {
+            } else if (data.score > score) {
 
-                $('.final').html("Le gagnant est " + otherplayer + " avec un nombre de poins de " + data.score)
+                $('.final').html(" .....WINNER..... " + otherplayer + " .....!");
 
-            } else if (score === data.score) {
+            } else if (score == data.score) {
 
-
-                $('.final').html("Match null " + otherplayer + " " + data.score + "<br>" +
-                    pseudo + " " + score
-                )
-
-
+                $('.final').html("Match Null")
             }
 
 
+
+
+
         })
-
-
-
 
 
     })

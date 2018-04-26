@@ -61,7 +61,7 @@ h1 {
 header {
     position: absolute;
     left: 33%;
-    background-color: #abdde5;
+
     font-weight: bold;
 
 }
@@ -109,8 +109,16 @@ footer {
 
 }
 
+.info {
+    border-radius: 5%;
+    position: absolute;
+    left: 3%;
+    border: 1px solid;
+    padding: 5px;
 
+    color: black;
 
+}
 
 @keyframes carre {
     0% {
@@ -121,29 +129,28 @@ footer {
     }
 }
 
+#pl1 {
 
-
-.pl1 {
-    animation-name: slide1;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 80px;
     width: 100px;
     height: 100px;
     position: absolute;
+    color: #28a745;
     top: 50%;
     left: 30%;
     text-align: center;
     text-justify: auto;
-    animation-duration: 3s;
+
 }
 
 
 @keyframes slide1 {
     from {
-        transform: translateX(20%)
+        transform: translateX(10%)
     }
     to {
-        transform: translateX(33%)
+        transform: translateX(70%)
     }
 }
 
@@ -152,33 +159,33 @@ footer {
         transform: translateX(66%)
     }
     to {
-        transform: translateX(53%)
+        transform: translateX(20%)
     }
 }
 
 
 .pl2 {
 
-    animation-name: slide2;
+
     font-weight: bold;
-    font-size: 50px;
+    font-size: 80px;
     width: 100px;
     height: 100px;
+    color: #d39e00;
     position: absolute;
     top: 50%;
     left: 53%;
     text-align: center;
     text-justify: auto;
-    animation-duration: 3s;
+
 }
 
 
 .result {
 
-
+    animation: 1s;
     font-weight: bold;
     font-size: 20px;
-
     width: 100px;
     height: 100px;
     position: absolute;
@@ -189,22 +196,49 @@ footer {
 
 }
 
+.resultR {
+
+    animation: 1s;
+    font-weight: bold;
+    font-size: 20px;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 33%;
+    left: 43%;
+    text-justify: auto;
+    text-align: center;
+
+}
+
+
+
+
 .anim {
     animation: slide;
 
 }
 
-.player {
+#player {
     position: absolute;
     top: 50%;
-    left: 20%;
+    left: 18%;
 
 }
 
 .otherplayer {
     position: absolute;
+
+    color: #f2c169;
+
     top: 50%;
     left: 66%;
+}
+
+.waitplayer {
+    animation: Test 1s infinite;
+    color: #7095ff;
+
 }
 
 .wait {
@@ -232,13 +266,62 @@ footer {
 
 .final {
 
+    animation: Test 3s infinite;
     position: absolute;
-    left: 35%;
-    top: 40%;
-    width: 400px;
-    height: 200px;
-    border: 1px black;
+    border-radius: 10%;
+    top: 30%;
+    left: 23%;
+    background: #20c997;
+    color: #b3d7ff;
+    font-size: 2em;
+    display: table-cell;
     text-align: center;
-    font-weight: bolder;
+    vertical-align: middle;
+    border: solid 1px #C68335;
 
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(400px) rotate(0);
+    }
+    20% {
+        transform: translateX(-50px) rotate(-0.5turn);
+    }
+    100% {
+        transform: translateX(800px) rotate(3turn);
+    }
+}
+
+.pseudo {
+
+    color: #1c7430;
+}
+
+.scorepl1 {
+
+    position: absolute;
+    color: #1c7430;
+    top: 25%;
+    left: 5%;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    font-size: 50px;
+
+    text-align: match-parent;
+    text-justify: auto;
+}
+
+.scorepl2 {
+    color: #d39e00;
+    position: absolute;
+    top: 25%;
+    left: 70%;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    font-size: 40px;
+    text-align: match-parent;
+    text-justify: auto;
 }

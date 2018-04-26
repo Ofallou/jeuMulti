@@ -64,7 +64,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/enr', enr);
 app.use('/connexion', connexion);
-app.use('/disconnect/:id', disconnect);
+app.use('/disconnect', disconnect);
 app.use('/connect', connect);
 app.use('/pseudo', pseudo);
 app.use('/jeu', jeu);
@@ -104,20 +104,20 @@ var getPlayers = function (pseudo) {
 
 
 //Mes vars
-let playerOnline = [];
-let players = [];
+
+
 let round = [];
-let partie = 0;
+
 let gamer = [];
 let score = 0;
-
+let players = [];
 
 io.on('connection', function (socket) {
 
     //console.log('joueur connecté');
     io.sockets.emit('welcome', {welcome: " Bataille des chiffres"});
 
-
+    let partie = 0;
     //Ajout des joueurs une fois connecté dans le tableau players
     socket.on('pseudo', function (pseudo) {
         mongoose.connect('mongodb://localhost/bataille');
@@ -129,15 +129,16 @@ io.on('connection', function (socket) {
             //console.log("trouvé"+data)
             if (err) throw err;
             gamer.push(pl);
-            //console.log("les joueurs en base complet" + playerOnline);
 
 
         if (players.indexOf(pseudo) == -1) {
+
             players.push(pseudo);
 
             console.log("Liste des joueurs " + players);
 
             if (players.length === 2) {
+
                 io.sockets.emit('on', {joueur: players, message: "Le jeu peur commencer !", gamers: gamer});
 
             } else if (players.length > 2) {
@@ -166,8 +167,8 @@ io.on('connection', function (socket) {
                     }, function (err) {
 
                     });
-
                     socket.broadcast.emit('scores', data);
+
                 });
 
 
@@ -205,33 +206,26 @@ io.on('connection', function (socket) {
 
                     message = "Attente !!";
                 }
+
                 partie++;
                 //console.log(message);
                 io.sockets.emit('carte', {data: data, message: message, partie: partie, score: score});
 
-                // console.log("**partie**" + partie)
+
+                console.log("**partie**" + partie)
 
 
             });
 
-            var tab = [];
-            socket.on('endParty', function (data) {
-                partie = 0;
-                tab.push(data);
 
-                // console.log("info joueurs" + tab[0]);
-
-                io.sockets.emit('gagnant', tab);
-
-
-            });
 
 
             socket.on('disconnect', function (socket) {
                 players.splice(pseudo);
                 console.log('Client disconnected !!');
-
-                gamer = [];
+                console.log(" apres disconnect" + players);
+                partie = 0;
+                // gamer = [];
             });
         }
         console.log(players);
