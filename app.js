@@ -16,7 +16,7 @@ const player = require('./public/javascripts/player');
 
 
 const store = new MongoDBStore({
-    uri: "mongodb://localhost:27017/quizz",
+    uri: "mongodb://localhost:27017/bataille",
     colection: 'sessions'
 
 });
@@ -64,7 +64,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/enr', enr);
 app.use('/connexion', connexion);
-app.use('/disconnect/:id', disconnect);
+app.use('/disconnect', disconnect);
 app.use('/connect', connect);
 app.use('/pseudo', pseudo);
 app.use('/jeu', jeu);
@@ -90,7 +90,7 @@ app.use(function (err, req, res, next) {
 
 
 var getPlayers = function (pseudo) {
-    mongoose.connect('mongodb://localhost/quizz');
+    mongoose.connect('mongodb://localhost/bataille');
 
     const joueur = mongoose.model('player', base);
     joueur.find({pseudo: pseudo}, function (err, data) {
@@ -103,42 +103,42 @@ var getPlayers = function (pseudo) {
 };
 
 
+//Mes vars
 
 
-
-
-//Nombre de joueurs
-let playerOnline = [];
-let players = [];
 let round = [];
-let partie = 0;
+
 let gamer = [];
 let score = 0;
+let players = [];
+
 io.on('connection', function (socket) {
 
-    console.log('joueur connecté');
-
+    //console.log('joueur connecté');
     io.sockets.emit('welcome', {welcome: " Bataille des chiffres"});
 
-
+    let partie = 0;
     //Ajout des joueurs une fois connecté dans le tableau players
     socket.on('pseudo', function (pseudo) {
-        mongoose.connect('mongodb://localhost/quizz');
+        mongoose.connect('mongodb://localhost/bataille');
         const joueur = mongoose.model('joueur', base);
+
 
 
         joueur.find({pseudo: pseudo}, function (err, pl) {
             //console.log("trouvé"+data)
             if (err) throw err;
             gamer.push(pl);
-            console.log("les joueurs en base complet" + playerOnline);
+
 
         if (players.indexOf(pseudo) == -1) {
+
             players.push(pseudo);
 
             console.log("Liste des joueurs " + players);
 
             if (players.length === 2) {
+
                 io.sockets.emit('on', {joueur: players, message: "Le jeu peur commencer !", gamers: gamer});
 
             } else if (players.length > 2) {
@@ -152,21 +152,22 @@ io.on('connection', function (socket) {
             }
 
 
-            socket.on('chiffre', function (data) {
 
+            socket.on('chiffre', function (data) {
 
                 socket.on('score', function (data) {
 
-                    console.log("les scores " + data.pseudo);
+                    // console.log("scores "+data.pseudo+ " ==> " + data.score);
+                    //On ajoute le score dans un tableau avant l'enr en base
                     joueur.findOneAndUpdate({pseudo: data.pseudo}, {
-                        '$set': {
+                        '$push': {
                             scores: data.score
                         }
+
                     }, function (err) {
 
-                        console.log(err);
-
-                    })
+                    });
+                    socket.broadcast.emit('scores', data);
 
                 });
 
@@ -205,9 +206,11 @@ io.on('connection', function (socket) {
 
                     message = "Attente !!";
                 }
+
                 partie++;
                 //console.log(message);
-                io.sockets.emit('carte', {data: data, message: message, partie: partie});
+                io.sockets.emit('carte', {data: data, message: message, partie: partie, score: score});
+
 
                 console.log("**partie**" + partie)
 
@@ -215,11 +218,14 @@ io.on('connection', function (socket) {
             });
 
 
+
+
             socket.on('disconnect', function (socket) {
                 players.splice(pseudo);
                 console.log('Client disconnected !!');
-
-                gamer = [];
+                console.log(" apres disconnect" + players);
+                partie = 0;
+                // gamer = [];
             });
         }
         console.log(players);

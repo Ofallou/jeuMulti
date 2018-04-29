@@ -9,13 +9,30 @@ block content
         div.connexion
 
             table.table
-                tbody
-                    th pseudo
-                    th score
+                tbody#table
+                    th Noms
+                    th.table-success Pseudos
+                    th.table-active Score *
+
                         each d in data
+                            -var liste = d.scores
+                            - liste.sort((a, b) => (b - a))
                             tr
+                                td=d.nomComplet
                                 td=d.pseudo
-                                td=d.scores
+                                td=liste[0]
+
+
+div.info
+  p Le jeu
+  p jeu de bataille de chiffres jouable a deux en lançant les dés.
+  p Pour lancer une partie vous devez vous inscrire avec un pseudo unique.
+  p Dés que l'image des dés apparait c'est votre tour cliquez pour lancer.
+  p Votre score apparait a gauche de l'ecran.
+  p Le tableau des scores est indiqué a l'accueil.
+  P
+
+  p Bon jeu.
 
 
 

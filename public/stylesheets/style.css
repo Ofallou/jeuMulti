@@ -59,7 +59,9 @@ h1 {
 }
 
 header {
-    background-color: #b3d7ff;
+    position: absolute;
+    left: 33%;
+
     font-weight: bold;
 
 }
@@ -107,12 +109,14 @@ footer {
 
 }
 
-
-
-.cercle {
+.info {
+    border-radius: 5%;
     position: absolute;
-    animation-name: carre;
-    animation-duration: 10s;
+    left: 3%;
+    border: 1px solid;
+    padding: 5px;
+
+    color: black;
 
 }
 
@@ -125,74 +129,63 @@ footer {
     }
 }
 
-.player1 {
-    position: absolute;
-    top: 10%;
-    left: 50px;
-    border-style: hidden;
+#pl1 {
 
-}
-
-.player2 {
-    position: absolute;
-    top: 10%;
-    left: 80px;
-    border-style: hidden;
-
-}
-
-.pl1 {
-    animation-name: slide1;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 80px;
     width: 100px;
     height: 100px;
     position: absolute;
-    top: 33%;
-    left: 33%;
+    color: #28a745;
+    top: 50%;
+    left: 30%;
     text-align: center;
     text-justify: auto;
+
 }
+
 
 @keyframes slide1 {
-    0% {
-        transform: translateX(0) rotate(0);
+    from {
+        transform: translateX(10%)
     }
-    100% {
-        transform: translateX(60px) rotate(1turn);
+    to {
+        transform: translateX(70%)
     }
-}
-
-.pl2 {
-
-    animation-name: slide2;
-    font-weight: bold;
-    font-size: 50px;
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    top: 33%;
-    left: 53%;
-
-    text-align: center;
-    text-justify: auto;
 }
 
 @keyframes slide2 {
-    0% {
-        transform: translateX(0) rotate(0);
+    from {
+        transform: translateX(66%)
     }
-    100% {
-        transform: translateX(60px) rotate(1turn);
+    to {
+        transform: translateX(20%)
     }
 }
 
-.result {
+
+.pl2 {
 
 
     font-weight: bold;
-    font-size: 20px;
+    font-size: 80px;
+    width: 100px;
+    height: 100px;
+    color: #d39e00;
+    position: absolute;
+    top: 50%;
+    left: 53%;
+    text-align: center;
+    text-justify: auto;
 
+}
+
+
+.result {
+
+    animation: 1s;
+    font-weight: bold;
+    font-size: 20px;
     width: 100px;
     height: 100px;
     position: absolute;
@@ -203,22 +196,49 @@ footer {
 
 }
 
+.resultR {
+
+    animation: 1s;
+    font-weight: bold;
+    font-size: 20px;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 33%;
+    left: 43%;
+    text-justify: auto;
+    text-align: center;
+
+}
+
+
+
+
 .anim {
     animation: slide;
 
 }
 
-.palyer {
+#player {
     position: absolute;
-    top: 20%;
-    left: 20%;
+    top: 50%;
+    left: 18%;
 
 }
 
 .otherplayer {
     position: absolute;
-    top: 20%;
+
+    color: #f2c169;
+
+    top: 50%;
     left: 66%;
+}
+
+.waitplayer {
+    animation: Test 1s infinite;
+    color: #7095ff;
+
 }
 
 .wait {
@@ -238,8 +258,70 @@ footer {
     }
 }
 
+.score, .of {
 
+    font-weight: bold;
 
+}
 
+.final {
 
+    animation: Test 3s infinite;
+    position: absolute;
+    border-radius: 10%;
+    top: 30%;
+    left: 23%;
+    background: #20c997;
+    color: #b3d7ff;
+    font-size: 2em;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border: solid 1px #C68335;
 
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(400px) rotate(0);
+    }
+    20% {
+        transform: translateX(-50px) rotate(-0.5turn);
+    }
+    100% {
+        transform: translateX(800px) rotate(3turn);
+    }
+}
+
+.pseudo {
+
+    color: #1c7430;
+}
+
+.scorepl1 {
+
+    position: absolute;
+    color: #1c7430;
+    top: 25%;
+    left: 5%;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    font-size: 50px;
+
+    text-align: match-parent;
+    text-justify: auto;
+}
+
+.scorepl2 {
+    color: #d39e00;
+    position: absolute;
+    top: 25%;
+    left: 70%;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    font-size: 40px;
+    text-align: match-parent;
+    text-justify: auto;
+}
